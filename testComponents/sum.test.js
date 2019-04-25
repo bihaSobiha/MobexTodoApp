@@ -1,11 +1,11 @@
-import 'react-native';
-import React from 'react';
-import Sum from './sum';
-import renderer from 'react-test-renderer';
+// import 'react-native';
+// import React from 'react';
+// import Sum from './sum';
+// import renderer from 'react-test-renderer';
 
-test('Main SnapShot', () => {
-    const snap = renderer.create(
-        <Sum />
-    ).toJSON();
-    expect(snap).toMatchSnapshot();
-});
+// test('Main SnapShot', () => {
+//     const snap = renderer.create(
+//         <Sum />
+//     ).toJSON();
+//     expect(snap).toMatchSnapshot();
+// });

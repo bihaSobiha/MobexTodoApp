@@ -1,18 +1,20 @@
 import { observable, action } from "mobx";
 import axios from 'axios';
+import { fromPromise } from 'mobx-utils';
 
 export class ObservableListStore {
-  @observable todos = [];
+  @observable todos = [fromPromise(Promise.resolve())];
+  //  todos = observable([]);
 
-  fetchTodo() {
-    axios.get("http://10.0.2.2:3000/todos")
+  @action async fetchTodo() {
+    await axios.get("http://10.0.2.2:3000/todos")
       .then((response) => {
         this.todos = response.data;
       });
   }
 
-  deleteTodo(param) {
-    axios.delete('http://10.0.2.2:3000/todos/' + param)
+  @action async deleteTodo(param) {
+    await axios.delete('http://10.0.2.2:3000/todos/' + param)
       .then((response) => {
         this.todos = this.todos.filter((l) => {
           return l.id !== param
@@ -20,27 +22,28 @@ export class ObservableListStore {
       });
   }
 
-  createTodo(todoData) {
-    axios({
+  @action async createTodo(todoData) {
+    await axios({
       method: 'post',
-      url: "http://localhost:3004/todos",
+      url: "http://10.0.2.2:3000/todos",
       data: todoData
-      })
+    })
       .then((response) => {
         this.todos.push(todoData);
       });
-      this.todos.push(todoData);
+    // this.todos.push(todoData);
   }
-  // 10.0.2.2:3000
-  updateTodo(todoData) {
-  axios({
-    method: 'put',
-    url: 'http://10.0.2.2:3000/todos/'+todoData.id,
-    data: todoData
+
+  @action async updateTodo(todoData) {
+    await axios({
+      method: 'put',
+      url: 'http://10.0.2.2:3000/todos/' + todoData.id,
+      data: todoData
     })
-    .then((response) => {
-      this.todos.push(todoData);
-    });
+      .then((response) => {
+        const start = this.todos.indexOf(todoData)
+        this.todos.splice(start, 1, todoData);
+      });
   }
 }
 

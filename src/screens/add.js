@@ -28,14 +28,14 @@ class Add extends Component {
         return true;
     }
 
-    addTodo() {
+    async addTodo() {
         const isValid = this.validate();
         if (isValid) {
             const todo = {
                 title: this.state.title
             };
-            this.props.observableListStore.createTodo(todo);
-            this.props.navigation.navigate('home');
+            await this.props.observableListStore.createTodo(todo);
+            this.props.navigation.navigate('home'); // comment when run test
         }
     }
     render() {
@@ -46,13 +46,6 @@ class Add extends Component {
                 </View>
 
                 <ScrollView style={styles.scrollContainer}>
-                    {/* <TextInput
-                        style={styles.textInput}
-                        onChangeText={(id) => this.setState({ id })}
-                        value={this.state.id}
-                        placeholder='Enter the Id'
-                        placeholderTextColor='black'
-                        underlineColorAndroid='transparent' /> */}
                     <View>
                         <TextInput
                             style={styles.textInput}

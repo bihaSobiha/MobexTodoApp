@@ -17,20 +17,20 @@ class Update extends Component {
 
     componentDidMount() {
         const todo = this.props.navigation.getParam('todo');
-        this.setState({ id: todo.key.toString() });
+        // const todo = this.props.todo //remove the comment for test only
+        this.setState({ id: todo.key.toString() })
         this.setState({ title: todo.title });
     }
 
-    changeTodo() {
-        const t = this.props.navigation.getParam('todo');
+    async changeTodo() {
         if (this.state.title !== '') {
 
             const todo = {
                 title: this.state.title,
                 id: this.state.id,
             };
-            this.props.observableListStore.updateTodo(todo);
-            this.props.navigation.navigate('home');
+            await this.props.observableListStore.updateTodo(todo);
+            this.props.navigation.navigate('home'); // comment when run test
         }
     }
     render() {
@@ -45,7 +45,7 @@ class Update extends Component {
                         <TextInput
                             style={styles.textInput}
                             onChangeText={(id) => this.setState({ id })}
-                            value={this.state.id}
+                            value={(this.state.id).toString()}
                             placeholder='Id'
                             placeholderTextColor='black'
                             underlineColorAndroid='transparent'>
