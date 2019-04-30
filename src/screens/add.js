@@ -20,6 +20,7 @@ class Add extends Component {
 
         if (this.state.title === '' || this.state.title === null) {
             titleError = "You Should Enter the Title";
+            return false;
         }
         if (titleError) {
             this.setState({ titleError });
@@ -35,7 +36,7 @@ class Add extends Component {
                 title: this.state.title
             };
             await this.props.observableListStore.createTodo(todo);
-            this.props.navigation.navigate('home'); // comment when run test
+            // this.props.navigation.navigate('home'); // comment when run test
         }
     }
     render() {

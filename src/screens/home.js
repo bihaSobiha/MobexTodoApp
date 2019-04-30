@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TouchableOpacity, FlatList, Button } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity, FlatList } from 'react-native'
 import styles from '../style/style';
 import ListComponent from '../components/list';
-import { observer, inject } from 'mobx-react'
+import { observer, inject } from 'mobx-react';
 
 @inject('observableListStore')
 @observer
@@ -47,10 +47,6 @@ class Home extends Component {
         })
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>-LIST OF TODOS-</Text>
-                </View>
-
                 <ScrollView style={styles.scrollContainer}>
                     <FlatList
                         data={todoData}

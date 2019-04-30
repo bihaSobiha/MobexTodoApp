@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Button, TextInput } from 'react-native';
 import styles from '../style/style';
-import { observer, inject } from 'mobx-react'
+import { observer, inject } from 'mobx-react';
 
 @inject('observableListStore')
 @observer
@@ -16,8 +16,8 @@ class Update extends Component {
     }
 
     componentDidMount() {
-        const todo = this.props.navigation.getParam('todo');
-        // const todo = this.props.todo //remove the comment for test only
+        // const todo = this.props.navigation.getParam('todo');
+        const todo = this.props.todo //remove the comment for test only
         this.setState({ id: todo.key.toString() })
         this.setState({ title: todo.title });
     }
@@ -30,7 +30,7 @@ class Update extends Component {
                 id: this.state.id,
             };
             await this.props.observableListStore.updateTodo(todo);
-            this.props.navigation.navigate('home'); // comment when run test
+            // this.props.navigation.navigate('home'); // comment when run test
         }
     }
     render() {

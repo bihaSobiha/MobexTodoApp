@@ -50,10 +50,9 @@ describe('todo-list', () => {
                 .reply(200, mockData);
 
             const deleteTodoButton = wrapper
-                .find(List).find('TouchableOpacity')
-                .findWhere(w => w.text() === 'D')
+                .find(List).find('Icon')
+                .findWhere(w => w.text() === 'trash-o')
                 .first()
-
             expect(deleteTodoButton).toHaveLength(1)
             await deleteTodoButton.props().onPress();
             wrapper.update();
