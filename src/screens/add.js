@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Button, TextInput } from 'react-native';
+import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../style/style';
 import { observer, inject } from 'mobx-react'
 
@@ -19,8 +19,7 @@ class Add extends Component {
         let titleError = "";
 
         if (this.state.title === '' || this.state.title === null) {
-            titleError = "You Should Enter the Title";
-            return false;
+            titleError = "Title is required";
         }
         if (titleError) {
             this.setState({ titleError });
@@ -33,24 +32,21 @@ class Add extends Component {
         const isValid = this.validate();
         if (isValid) {
             const todo = {
-                title: this.state.title
+                title: this.state.title,
+                id:this.props.observableListStore.todos.get(this.props.observableListStore.todos.length - 1).id+1,
             };
             await this.props.observableListStore.createTodo(todo);
-            // this.props.navigation.navigate('home'); // comment when run test
+            this.props.navigation.navigate('HOME');
         }
     }
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>-ADD TODOS-</Text>
-                </View>
-
                 <ScrollView style={styles.scrollContainer}>
                     <View>
                         <TextInput
                             style={styles.textInput}
-                            onChangeText={(title) => this.setState({ title })}
+                            onChangeText={(title,titleError) => this.setState({ title, titleError:null })}
                             value={this.state.title}
                             placeholder='Enter the title'
                             placeholderTextColor='black'
@@ -59,10 +55,9 @@ class Add extends Component {
                     </View>
                 </ScrollView>
 
-                <Button color="#3bbfb2"
-                    title="Add"
-                    onPress={this.addTodo}
-                />
+                <TouchableOpacity onPress={this.addTodo}>
+                    <Text style={styles.loginBtnText}>ADD</Text>
+                </TouchableOpacity>
             </View>
         );
     }

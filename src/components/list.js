@@ -13,8 +13,8 @@ class List extends Component {
                     <TouchableOpacity style={styles.listUpdate} onPress={this.props.udate}>
                         <Icon style={styles.listDeleteText} name="edit" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.listDelete} onPress={this.props.deleteMethod}>
-                        <Icon style={styles.listDeleteText} name="trash-o" />
+                    <TouchableOpacity style={styles.listDelete}>
+                        <Icon style={styles.listDeleteText} name="trash-o" onPress={this.props.deleteMethod}/>
                     </TouchableOpacity>
                 </View>
             </View>

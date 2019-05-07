@@ -31,7 +31,6 @@ export class ObservableListStore {
       .then((response) => {
         this.todos.push(todoData);
       });
-    // this.todos.push(todoData);
   }
 
   @action async updateTodo(todoData) {
@@ -50,5 +49,3 @@ export class ObservableListStore {
 
 const observableListStore = new ObservableListStore()
 export default observableListStore
-
-// export default new ObservableListStore

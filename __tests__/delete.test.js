@@ -1,14 +1,15 @@
-import { ObservableListStore as Todostore } from "../mobx/TodoStore"
-import observableListStore from "../mobx/TodoStore"
+import { ObservableListStore as Todostore } from "../src/mobx/TodoStore"
+import observableListStore from "../src/mobx/TodoStore"
 import 'react-native';
 import React from 'react';
-import Home from './home';
+import Home from '../src/screens/home';
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { observable } from 'mobx';
-import List from '../components/list';
+import List from '../src/components/list';
+import Alert from 'Alert'
 
 it('Home screen renders correctly', () => {
     const home = shallow(<Home observableListStore={observableListStore} />);
@@ -43,23 +44,29 @@ describe('todo-list', () => {
             expect(wrapper.props().observableListStore.todos.length).toBe(2);
         });
 
+        jest.mock('Alert', () => {
+            return {
+                alert: jest.fn()
+            }
+        });
         it('can delete a Todo with Enzyme', async () => {
             const mock = new MockAdapter(axios);
             mock
                 .onDelete('http://10.0.2.2:3000/todos/' + mockData[0].id)
                 .reply(200, mockData);
-
             const deleteTodoButton = wrapper
-                .find(List).find('Icon')
-                .findWhere(w => w.text() === 'trash-o')
+                .find(List).find('TouchableOpacity')
+                .findWhere(w => w.prop('name') === 'trash-o')
                 .first()
+            deleteTodoButton.props().onPress();
             expect(deleteTodoButton).toHaveLength(1)
-            await deleteTodoButton.props().onPress();
-            wrapper.update();
 
+            expect(Alert.alert).toHaveBeenCalled();
+            await Alert.alert.mock.calls[0][2][1].onPress()
             expect(spydel).toHaveBeenCalled();
+            wrapper.update();
             expect(wrapper.props().observableListStore.todos[0].title).toEqual(mockData[1].title);
             expect(wrapper.props().observableListStore.todos.length).toBe(1);
-        });
+        })
     });
 });

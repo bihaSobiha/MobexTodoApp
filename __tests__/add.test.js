@@ -1,8 +1,8 @@
-import { ObservableListStore as Todostore } from "../mobx/TodoStore"
-import observableListStore from "../mobx/TodoStore"
+import { ObservableListStore as Todostore } from "../src/mobx/TodoStore"
+import observableListStore from "../src/mobx/TodoStore"
 import 'react-native';
 import React from 'react';
-import Add from './add';
+import Add from '../src/screens/add';
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { shallow, mount } from 'enzyme';
@@ -17,8 +17,8 @@ it('Add screen renders correctly', () => {
 describe('todo-list', () => {
     describe('enzyme tests', () => {
         it('can add a Todo with Enzyme', async () => {
-            const wrapper = mount(<Add observableListStore={observableListStore} />);
-
+            const navigation = { navigate: jest.fn() };
+            const wrapper = mount(<Add observableListStore={observableListStore} navigation={navigation} />);
             const spy = jest.spyOn(Todostore.prototype, 'createTodo');
 
             const mockData = observable(
@@ -28,12 +28,12 @@ describe('todo-list', () => {
             mock
                 .onAny("http://10.0.2.2:3000/todos")
                 .reply(200, mockData);
-            
+
             const newTodoText = 'I need to do something...';
             const newTodoTextInput = wrapper.find('TextInput').first();
             const addTodoButton = wrapper
-                .find('Button')
-                .findWhere(w => w.text() === 'Add')
+                .find('TouchableOpacity')
+                .findWhere(w => w.text() === 'ADD')
                 .first();
 
             await newTodoTextInput.props().onChangeText(newTodoText);

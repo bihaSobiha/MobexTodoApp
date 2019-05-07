@@ -102,8 +102,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     loginContainer: {
-        flex:1,
-        backgroundColor:'#3bbfb2',
+        flex: 1,
+        backgroundColor: '#3bbfb2',
         justifyContent: "center",
         paddingRight: 20,
         paddingLeft: 20,
@@ -114,13 +114,13 @@ export default StyleSheet.create({
         fontSize: 20,
         paddingLeft: 15,
     },
-    loginBtnText:{
+    loginBtnText: {
         backgroundColor: '#eceef1',
         paddingBottom: 10,
         paddingTop: 10,
         fontSize: 18,
         marginTop: 25,
-        color:'#26ae90',
+        color: '#26ae90',
         textAlign: 'center',
         fontWeight: 'bold',
     },
@@ -131,8 +131,34 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    error:{
+    error: {
         borderWidth: 3,
         borderColor: 'red',
+    },
+    navSectionStyle: {
+        backgroundColor: 'lightgrey'
+    },
+
+    footerContainer: {
+        padding: 20,
+        backgroundColor: 'lightgrey'
+    },
+    navItemStyle: {
+        padding: 10,
+        fontSize: 17,
+        color: '#26ae90',
+        fontWeight: 'bold',
+    },
+    navButtonStyle: {
+        padding: 10,
+        fontSize: 20,
+        color: '#26ae90',
+        fontWeight: 'bold',
+    },
+    buttonPress: {
+        padding: 10,
+        fontSize: 17,
+        color: 'black',
+        fontWeight: 'bold',
     }
 });

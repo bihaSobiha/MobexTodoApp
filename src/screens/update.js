@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Button, TextInput } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import styles from '../style/style';
 import { observer, inject } from 'mobx-react';
 
@@ -16,8 +16,8 @@ class Update extends Component {
     }
 
     componentDidMount() {
-        // const todo = this.props.navigation.getParam('todo');
-        const todo = this.props.todo //remove the comment for test only
+        const todo = this.props.navigation.getParam('todo');
+        // const todo = this.props.todo //remove the comment for test only
         this.setState({ id: todo.key.toString() })
         this.setState({ title: todo.title });
     }
@@ -30,16 +30,12 @@ class Update extends Component {
                 id: this.state.id,
             };
             await this.props.observableListStore.updateTodo(todo);
-            // this.props.navigation.navigate('home'); // comment when run test
+            this.props.navigation.navigate('HOME');
         }
     }
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>-UPDATE TODOS-</Text>
-                </View>
-
                 <ScrollView style={styles.scrollContainer}>
                     <View pointerEvents="none">
                         <TextInput
@@ -61,10 +57,9 @@ class Update extends Component {
                     </TextInput>
                 </ScrollView>
 
-                <Button color="#3bbfb2"
-                    title="Update"
-                    onPress={this.changeTodo}
-                />
+                <TouchableOpacity onPress={this.changeTodo}>
+                    <Text style={styles.loginBtnText}>UPDATE</Text>
+                </TouchableOpacity>
             </View>
         );
     }
