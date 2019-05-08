@@ -29,7 +29,7 @@ class Login extends Component {
 
         if (type == constants.USERNAME) {
             this.setState({ name: text })
-            // console.warn(this.state.name)
+            
             //Username format validation
             if (alph.test(text)) {
                 this.setState({ nameValidate: true })
@@ -86,13 +86,13 @@ class Login extends Component {
             this.setState({ passwordValidate: true })
             this.props.navigation.navigate(constants.HOME_SCREEN);
         }
-        //username and password missmatch
+        //username and password mismatch
         else {
             this.setState({ nameValidate: false })
             this.setState({ passwordValidate: false })
             Alert.alert(
                 messages.LOGIN_FAILD,
-                messages.LOGIN_MISSMATCH,
+                messages.LOGIN_MISMATCH,
                 [
                     {
                         text: messages.ALERT_CANCEL_BUTTON_LABLE,

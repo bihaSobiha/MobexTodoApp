@@ -6,7 +6,7 @@ export const toDoAppMessages = {
     USERNAME_ISNULL:"Username is required",
     PASSWORD_ISNULL:"Password is required",
     LOGIN_FAILD:"Login Failed",
-    LOGIN_MISSMATCH:"Username and Password Missmatch",
+    LOGIN_MISMATCH:"Username and Password Mismatch",
     LOGIN_BUTTON_LABLE:"LOGIN",
     USERNAME_PLACEHOLDER:"Username",
     PASSWORD_PLACEHOLDER:"Password",

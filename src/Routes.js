@@ -82,7 +82,7 @@ const MainDrawerNavigator = createDrawerNavigator({
 
 //Login screen stack navigator
 const StackNavigator = createStackNavigator({
-    // login: { screen: LoginScreen },
+    login: { screen: LoginScreen },
     drawer: { screen: MainDrawerNavigator },
 },
     {
