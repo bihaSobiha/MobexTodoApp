@@ -1,40 +1,24 @@
+//This file for create Logout screen
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { Card, CardItem } from 'native-base'
 import styles from '../style/style';
+import { toDoAppMessages as messages } from '../constants/messages';
+import { toDoAppConstants as constants } from '../constants/constants';
 
 class Logout extends Component {
     render() {
         return (
-            <View style={{ paddingVertical: 20 }}>
+            <View style={styles.container}>
                 <Card>
-                    <CardItem header style={{
-                            alignItems: "center",
-                            justifyContent: "center",
-                            alignSelf: "center",
-                        }}>
-                        <Text style={{
-                            color:'black',
-                            fontSize: 25,
-                            fontWeight: 'bold',
-                        }}>John Doe</Text>
+                    <CardItem header style={styles.cardHeader}>
+                        <Text style={styles.cardText}>{messages.USER_NAME}</Text>
                     </CardItem>
-                    <View
-                        style={{
-                            backgroundColor: "#bcbec1",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            width: 80,
-                            height: 80,
-                            borderRadius: 40,
-                            alignSelf: "center",
-                            marginBottom: 20
-                        }}
-                    >
-                        <Text style={{ color: "white", fontSize: 28 }}>JD</Text>
+                    <View>
+                        <Image source={messages.PROFILE_IMAGE} style={styles.profileImage} />
                     </View>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('login')}>
-                        <Text style={styles.loginBtnText}>SIGN OUT</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate(constants.LOGIN_SCREEN)}>
+                        <Text style={styles.loginBtnText}>{messages.SIGNOUT_BUTTON_LABLE}</Text>
                     </TouchableOpacity>
                 </Card>
             </View>

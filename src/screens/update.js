@@ -1,7 +1,10 @@
+//This file for create Update screen
 import React, { Component } from 'react';
 import { Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import styles from '../style/style';
 import { observer, inject } from 'mobx-react';
+import {toDoAppMessages as messages} from '../constants/messages';
+import {toDoAppConstants as constants} from '../constants/constants';
 
 @inject('observableListStore')
 @observer
@@ -15,6 +18,7 @@ class Update extends Component {
         };
     }
 
+    //initially get an object to update from home screen
     componentDidMount() {
         const todo = this.props.navigation.getParam('todo');
         // const todo = this.props.todo //remove the comment for test only
@@ -22,6 +26,7 @@ class Update extends Component {
         this.setState({ title: todo.title });
     }
 
+    //update button press event
     async changeTodo() {
         if (this.state.title !== '') {
 
@@ -30,7 +35,7 @@ class Update extends Component {
                 id: this.state.id,
             };
             await this.props.observableListStore.updateTodo(todo);
-            this.props.navigation.navigate('HOME');
+            this.props.navigation.navigate(constants.HOME_SCREEN);
         }
     }
     render() {
@@ -41,24 +46,18 @@ class Update extends Component {
                         <TextInput
                             style={styles.textInput}
                             onChangeText={(id) => this.setState({ id })}
-                            value={(this.state.id).toString()}
-                            placeholder='Id'
-                            placeholderTextColor='black'
-                            underlineColorAndroid='transparent'>
+                            value={(this.state.id).toString()}>
                         </TextInput>
                     </View>
                     <TextInput
                         style={styles.textInput}
                         value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        placeholder='title'
-                        placeholderTextColor='black'
-                        underlineColorAndroid='transparent'>
+                        onChangeText={(title) => this.setState({ title })}>
                     </TextInput>
                 </ScrollView>
 
                 <TouchableOpacity onPress={this.changeTodo}>
-                    <Text style={styles.loginBtnText}>UPDATE</Text>
+                    <Text style={styles.loginBtnText}>{messages.UPDATE_BUTTON_LABLE}</Text>
                 </TouchableOpacity>
             </View>
         );

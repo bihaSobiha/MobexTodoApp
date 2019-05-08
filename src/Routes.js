@@ -1,3 +1,4 @@
+//This file for manage Navigation
 import React, { Component } from 'react';
 import styles from '../src/style/style';
 import { createAppContainer, createStackNavigator, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation';
@@ -12,8 +13,10 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import customDrawer from './DarawerComponent';
 import LogoutScreen from './screens/logout';
 import { Text} from 'react-native';
+import {toDoAppConstants as constants} from './constants/constants';
+import {toDoAppMessages as messages} from './constants/messages';
 
-
+//Main screen stack navigation
 const MainStackNavigator = createStackNavigator({
     HOME: { screen: HomeScreen },
     ADD: { screen: AddScreen },
@@ -27,12 +30,13 @@ const MainStackNavigator = createStackNavigator({
                 headerStyle: styles.header,
                 headerTitleStyle: styles.headerText,
                 headerLeft: <Icon style={styles.headerText} size={30} name="bars" onPress={() => navigation.openDrawer()} />,
-                headerRight: <Icon style={styles.headerText} size={40} name="sign-out" onPress={() => navigation.navigate('LOGOUT')}><Text>Logout</Text></Icon>
+                headerRight: <Icon style={styles.headerText} size={40} name="sign-out" onPress={() => navigation.navigate(constants.LOGOUT_SCREEN)}><Text>{messages.LOGOUT_LABLE}</Text></Icon>
             }
         },
     }
 );
 
+//About stack navigation
 const AboutStackNavigator = createStackNavigator({
     ABOUT: { screen: AboutScreen },
 },
@@ -48,6 +52,7 @@ const AboutStackNavigator = createStackNavigator({
     }
 );
 
+//Tap Navigation
 const MainTapNavigator = createBottomTabNavigator({
     HOME: { screen: MainStackNavigator },
     ABOUT: AboutStackNavigator,
@@ -63,6 +68,7 @@ const MainTapNavigator = createBottomTabNavigator({
     },
 );
 
+//Drawer Navigation
 const MainDrawerNavigator = createDrawerNavigator({
     Home: {
         screen: MainTapNavigator,
@@ -71,19 +77,12 @@ const MainDrawerNavigator = createDrawerNavigator({
     {
         drawerPosition: 'left',
         contentComponent: customDrawer,
-        initialRouteName: 'Home',
-        contentOptions: {
-            activeTintColor: '#ffffff',
-            inactiveTintColor: '#1999CE',
-
-            activeBackgroundColor: '#1999CE',
-            inactiveBackgroundColor: '#ffffff',
-        },
     },
 );
 
+//Login screen stack navigator
 const StackNavigator = createStackNavigator({
-    login: { screen: LoginScreen },
+    // login: { screen: LoginScreen },
     drawer: { screen: MainDrawerNavigator },
 },
     {

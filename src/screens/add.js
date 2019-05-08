@@ -1,7 +1,10 @@
+//This file for create Add screen
 import React, { Component } from 'react';
 import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../style/style';
 import { observer, inject } from 'mobx-react'
+import {toDoAppMessages as messages} from '../constants/messages';
+import {toDoAppConstants as constants} from '../constants/constants';
 
 @inject('observableListStore')
 @observer
@@ -10,16 +13,17 @@ class Add extends Component {
         super();
         this.addTodo = this.addTodo.bind(this);
         this.state = {
-            title: '',
-            titleError: '',
+            title: '',          //initialize list title as empty
+            titleError: '',     //initialize list title error as empty for validation
         };
     }
 
+    //list title null validation
     validate = () => {
         let titleError = "";
 
         if (this.state.title === '' || this.state.title === null) {
-            titleError = "Title is required";
+            titleError = messages.TITLE_ISNULL;
         }
         if (titleError) {
             this.setState({ titleError });
@@ -28,6 +32,7 @@ class Add extends Component {
         return true;
     }
 
+    //Add button click function
     async addTodo() {
         const isValid = this.validate();
         if (isValid) {
@@ -36,9 +41,10 @@ class Add extends Component {
                 id:this.props.observableListStore.todos.get(this.props.observableListStore.todos.length - 1).id+1,
             };
             await this.props.observableListStore.createTodo(todo);
-            this.props.navigation.navigate('HOME');
+            this.props.navigation.navigate(constants.HOME_SCREEN);
         }
     }
+    
     render() {
         return (
             <View style={styles.container}>
@@ -48,15 +54,13 @@ class Add extends Component {
                             style={styles.textInput}
                             onChangeText={(title,titleError) => this.setState({ title, titleError:null })}
                             value={this.state.title}
-                            placeholder='Enter the title'
-                            placeholderTextColor='black'
-                            underlineColorAndroid='transparent' />
-                        <Text style={{ color: "red", fontSize: 14 }}> {this.state.titleError} </Text>
+                            placeholder={messages.TITLE_PLACEHOLDER}/>
+                        <Text style={styles.errorText}> {this.state.titleError} </Text>
                     </View>
                 </ScrollView>
 
                 <TouchableOpacity onPress={this.addTodo}>
-                    <Text style={styles.loginBtnText}>ADD</Text>
+                    <Text style={styles.loginBtnText}>{messages.ADD_BUTTON}</Text>
                 </TouchableOpacity>
             </View>
         );

@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
-    container: {
+    //For all the screens
+    container: {            
         flex: 1,
     },
     header: {
         backgroundColor: '#3bbfb2',
-        alignItems: 'center',
-        justifyContent: 'center',
         borderBottomWidth: 10,
         borderBottomColor: '#ddd',
     },
@@ -27,16 +26,20 @@ export default StyleSheet.create({
         borderTopWidth: 10,
         borderTopColor: '#ddd',
     },
+
+    //Add screen and update scteen form style
     textInput: {
         margin: 10,
         marginBottom: 0,
         height: 50,
         paddingHorizontal: 10,
         borderRadius: 4,
-        borderColor: '#ccc',
+        borderColor: 'black',
         borderWidth: 1,
         fontSize: 18,
     },
+
+    //Home screen add button style
     addButton: {
         position: 'absolute',
         zIndex: 11,
@@ -53,19 +56,13 @@ export default StyleSheet.create({
         color: '#fff',
         fontSize: 24,
     },
+
+    //List component style
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
         padding: 10,
         marginBottom: 3,
-    },
-    list: {
-        position: 'relative',
-        padding: 20,
-        paddingRight: 100,
-        borderBottomWidth: 2,
-        borderBottomColor: '#ededed',
-        flex: 1,
     },
     listText: {
         paddingLeft: 20,
@@ -85,7 +82,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-
     listDeleteText: {
         color: 'black',
         fontSize: 18,
@@ -101,6 +97,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+    //login screen style
     loginContainer: {
         flex: 1,
         backgroundColor: '#3bbfb2',
@@ -124,21 +122,18 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
     },
-    btnTextSignUp: {
-        fontSize: 16,
-        color: '#fff',
-        marginTop: 70,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
+
+    //validation style
     error: {
         borderWidth: 3,
         borderColor: 'red',
     },
-    navSectionStyle: {
-        backgroundColor: 'lightgrey'
+    errorText: {
+        color: "red",
+        fontSize: 16
     },
 
+    //Drawer menue style
     footerContainer: {
         padding: 20,
         backgroundColor: 'lightgrey'
@@ -149,16 +144,31 @@ export default StyleSheet.create({
         color: '#26ae90',
         fontWeight: 'bold',
     },
-    navButtonStyle: {
-        padding: 10,
-        fontSize: 20,
-        color: '#26ae90',
-        fontWeight: 'bold',
-    },
     buttonPress: {
         padding: 10,
         fontSize: 17,
         color: 'black',
         fontWeight: 'bold',
-    }
+    },
+
+    //Logout screen style
+    cardHeader: {
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    cardText: {
+        color: 'black',
+        fontSize: 25,
+        fontWeight: 'bold',
+    },
+    profileImage: {
+        backgroundColor: "#bcbec1",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        alignSelf: "center",
+        marginBottom: 20
+    },
 });

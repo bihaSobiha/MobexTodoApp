@@ -1,3 +1,4 @@
+//This file for render every single list with delete and updte button
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from '../style/style';
