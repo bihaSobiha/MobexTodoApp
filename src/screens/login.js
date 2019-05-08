@@ -85,6 +85,7 @@ class Login extends Component {
             this.setState({ nameValidate: true })
             this.setState({ passwordValidate: true })
             this.props.navigation.navigate(constants.HOME_SCREEN);
+            this.clearTextInput();
         }
         //username and password mismatch
         else {
