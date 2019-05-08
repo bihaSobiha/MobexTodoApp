@@ -8,7 +8,7 @@ export class ObservableListStore {
   @observable todos = [fromPromise(Promise.resolve())]; //initialize an empty array
   //  todos = observable([]);
 
-  //TodoList Get Method
+  //Get the TodoList from API call
   @action async fetchTodo() {
     await axios.get(constants.API)
       .then((response) => {
@@ -16,7 +16,7 @@ export class ObservableListStore {
       });
   }
 
-  //TodoList delete Method 
+  //Delete an item of TodoList from API call 
   @action async deleteTodo(param) {
     await axios.delete(constants.API + '/' + param)
       .then((response) => {
@@ -26,7 +26,7 @@ export class ObservableListStore {
       });
   }
 
-  //TodoList create method
+  //Create an item to TodoList from API call
   @action async createTodo(todoData) {
     await axios({
       method: 'post',
@@ -38,7 +38,7 @@ export class ObservableListStore {
       });
   }
 
-  //TodoList update method
+  //Update a particuler item of TodoList from API call
   @action async updateTodo(todoData) {
     await axios({
       method: 'put',

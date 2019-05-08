@@ -14,8 +14,8 @@ it('Home screen renders correctly', () => {
     renderer.create(home);
 });
 
-describe('Home', () => {
-    describe('when the home is start to load', () => {
+describe('todo-list', () => {
+    describe('enzyme tests', () => {
         const spy = jest.spyOn(Todostore.prototype, 'fetchTodo');
         const home = shallow(<Home observableListStore={observableListStore} />);
 

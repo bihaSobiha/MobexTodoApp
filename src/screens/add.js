@@ -32,7 +32,7 @@ class Add extends Component {
         return true;
     }
 
-    //Add button click function
+    //Validate the user input, add an item to the todo list and navigate to home screen
     async addTodo() {
         const isValid = this.validate();
         if (isValid) {

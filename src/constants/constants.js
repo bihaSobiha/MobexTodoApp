@@ -2,6 +2,8 @@ export const toDoAppConstants = {
     //LoginScreen Constants
     USERNAME : "username",
     PASSWORD : "password",
+    ALPHABETS:/^[a-zA-Z]+$/,
+    NUMBERS:/^[0-9]+$/,
 
     //Navigation Screen Names
     HOME_SCREEN:"HOME",

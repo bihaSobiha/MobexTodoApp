@@ -26,7 +26,7 @@ class Update extends Component {
         this.setState({ title: todo.title });
     }
 
-    //update button press event
+    //To call update function from the store and update the todo list
     async changeTodo() {
         if (this.state.title !== '') {
 

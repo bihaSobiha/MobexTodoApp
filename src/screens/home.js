@@ -17,29 +17,29 @@ class Home extends Component {
         this.onPress = this.onPress.bind(this);
     }
 
-    //To call fetch function
+    //To call fetch function from the store
     componentDidMount() {
         this.props.observableListStore.fetchTodo();
     }
 
-    //Add button press event
+    //Navigate to add screen
     onPress() {
         this.props.navigation.navigate(constants.ADD_SCREEN);
     }
 
-    //Updatebutton press event
+    //Navigate and pass the particular object to update screen
     onUpdate(todo) {
         this.props.navigation.navigate(constants.UPDATE_SCREEN, {
             todo
         });
     }
 
-    //To delete the list
+    //To call delete function from the store
     async deleteList(id) {
         await this.props.observableListStore.deleteTodo(id);
     }
 
-    //Delete button press event
+    //Pop up alert box and while click ok delete the todo list item
     onDelete(item) {
         Alert.alert(
             messages.DELETE_ALERTBOX_LABLE,
@@ -54,7 +54,7 @@ class Home extends Component {
         );
     }
 
-    // to render evety list inide scrollview
+    // Display every list inside the scrollview using list component
     renderRow(item) {
         return (
             <ListComponent keyval={item.key} title={item.title} deleteMethod={() => this.onDelete(item)} udate={() => this.onUpdate(item)} />

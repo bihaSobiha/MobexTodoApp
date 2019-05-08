@@ -22,8 +22,8 @@ class Login extends Component {
 
     // onchange text validation
     validate(text, type) {
-        alph = messages.ALPHABETS //Username farmat should be alphabets
-        num = messages.NUMBERS     //Password formar should be numbers
+        alph = constants.ALPHABETS //Username farmat should be alphabets
+        num = constants.NUMBERS     //Password formar should be numbers
         let nameError = "";
         let passwordError = "";
 
@@ -65,7 +65,7 @@ class Login extends Component {
         this.setState({ password: null })
     }
 
-    //Login button press event
+    //Validate the user input and navigate to home screen
     onPress() {
         let nameError = "";
         let passwordError = "";
