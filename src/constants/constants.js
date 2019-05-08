@@ -4,6 +4,7 @@ export const toDoAppConstants = {
     PASSWORD : "password",
     ALPHABETS:/^[a-zA-Z]+$/,
     NUMBERS:/^[0-9]+$/,
+    LOCAL_STORAGE_KEY:'user',
 
     //Navigation Screen Names
     HOME_SCREEN:"HOME",

@@ -1,6 +1,7 @@
 //This file for create Login screen
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Keyboard, Alert } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import styles from '../style/style';
 import { toDoAppMessages as messages } from '../constants/messages';
 import { toDoAppConstants as constants } from '../constants/constants';
@@ -29,7 +30,7 @@ class Login extends Component {
 
         if (type == constants.USERNAME) {
             this.setState({ name: text })
-            
+
             //Username format validation
             if (alph.test(text)) {
                 this.setState({ nameValidate: true })
@@ -65,11 +66,27 @@ class Login extends Component {
         this.setState({ password: null })
     }
 
+    //To save the login detail in the local storage
+    saveData() {
+        let obj = {
+            userName: this.state.name,
+            passward: this.state.password
+        }
+        AsyncStorage.setItem(constants.LOCAL_STORAGE_KEY, JSON.stringify(obj))
+    }
+
+    //To get the data from local storage, and if it exist navigate to home screen
+    async initialData() {
+        let value = await AsyncStorage.getItem(constants.LOCAL_STORAGE_KEY)
+        if (value !== null) {
+            this.props.navigation.navigate(constants.HOME_SCREEN)
+        }
+    }
+
     //Validate the user input and navigate to home screen
     onPress() {
         let nameError = "";
         let passwordError = "";
-
         //username null validation
         if (this.state.name === '' || this.state.name === null) {
             nameError = messages.USERNAME_ISNULL;
@@ -84,6 +101,7 @@ class Login extends Component {
         else if (this.state.name == "admin" && this.state.password == "1234") {
             this.setState({ nameValidate: true })
             this.setState({ passwordValidate: true })
+            this.saveData();
             this.props.navigation.navigate(constants.HOME_SCREEN);
             this.clearTextInput();
         }
@@ -105,6 +123,10 @@ class Login extends Component {
         }
         !this.state.nameValidate ? this.setState({ nameError }) : this.setState({ nameError: null })
         !this.state.passwordValidate ? this.setState({ passwordError }) : this.setState({ passwordError: null })
+    }
+
+    componentDidMount() {
+        this.initialData();
     }
 
     render() {
